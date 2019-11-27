@@ -36,14 +36,12 @@ def maximalRectangleInHistogram(histogram):
             i += 1
         else:
             curr = posStack.pop()
-            width = i if len(posStack) == 0 \
-                else i - posStack[-1] - 1
+            width = i if len(posStack) == 0 else i - posStack[-1] - 1
             maxArea = max(maxArea, width * histogram[curr])
     # Clean the stack.
     while posStack:
         curr = posStack.pop()
-        width = i if len(posStack) == 0 \
-            else len(histogram) - posStack[-1] - 1
+        width = i if len(posStack) == 0 else len(histogram) - posStack[-1] - 1
         maxArea = max(maxArea, width * histogram[curr])
     return maxArea
 
@@ -52,7 +50,7 @@ def debugPrint(historgram):
     out = [i for i in historgram]
     print(out)
 matrix = []
-file = open('in2.txt', "r")
+file = open('in.txt', "r")
 for line in file:
     line = line.replace(" ","")
     line = line.replace("\n","")
@@ -60,6 +58,6 @@ for line in file:
 
 print(maximalRectangle(matrix))
 answer = maximalRectangle(matrix)
-with open('out2.txt', 'w') as f:
+with open('out.txt', 'w') as f:
     f.write("%s " % answer)
     f.write('\n')
