@@ -1,23 +1,17 @@
 import re
-def maximalRectangle(matrix):
+def maximalRectangle(matrix,numRowCol):
     if not matrix:
         return 0
     maxArea = 0
-    maxRow = len(matrix)
-    maxCol = len(matrix[0])
-    # For every row in the given 2D matrix, it is a "Largest Rectangle in
-    # Histogram" problem, which is the sub-problem.
-    lookupTable = [0 for _ in range(maxCol)]
-    for row in range(maxRow):
-        for col in range(maxCol):
+    lookupTable = [0 for _ in range(numRowCol)]
+    for row in range(numRowCol):
+        for col in range(numRowCol):
             # If it is "1"
             if int(matrix[row][col]) > 0:
-                # Accumulate the column if if's 1's.
                 lookupTable[col] += int(matrix[row][col])
             else:
                 # Clean the column if it's 0's.
                 lookupTable[col] = 0
-        # self.debugPrint(lookupTable)
         # Calculate the maximum area.
         maxArea = max(maxArea, maximalRectangleInHistogram(lookupTable))
     return maxArea
@@ -30,8 +24,6 @@ def maximalRectangleInHistogram(histogram):
     maxArea = 0
     while i < len(histogram):
         if len(posStack) == 0 or histogram[i] > histogram[posStack[-1]]:
-            # Advance the index when either the stack is empty or the
-            # current height is greater than the top one of the stack.
             posStack.append(i)
             i += 1
         else:
@@ -50,14 +42,17 @@ def debugPrint(historgram):
     out = [i for i in historgram]
     print(out)
 matrix = []
+numRowCol = int(open('in.txt', "r").readline()[0])
 file = open('in.txt', "r")
-for line in file:
+readFile = file.readlines()[1:]
+for line in readFile:
     line = line.replace(" ","")
     line = line.replace("\n","")
     matrix.append(line)
 
-print(maximalRectangle(matrix))
-answer = maximalRectangle(matrix)
+print(maximalRectangle(matrix,numRowCol))
+answer = maximalRectangle(matrix, numRowCol)
 with open('out.txt', 'w') as f:
     f.write("%s " % answer)
     f.write('\n')
+
