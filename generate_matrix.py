@@ -1,5 +1,5 @@
 import numpy as np
-size = 1000
+size = 999
 A = np.random.randint(2, size=(size,size))
 np.savetxt('in.txt', A, fmt="%d")
 

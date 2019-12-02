@@ -1,6 +1,4 @@
-import re
-import timeit
-start = timeit.timeit()
+import sys
 def maximalRectangle(matrix,numRowCol):
     if not matrix:
         return 0
@@ -39,10 +37,10 @@ def maximalRectangleInHistogram(histogram):
         width = i if len(posStack) == 0 else len(histogram) - posStack[-1] - 1
         maxArea = max(maxArea, width * histogram[curr])
     return maxArea
-# Create value and read f
-matrix = file
+# Create value and read file
+matrix = []
 numRowCol = int(open('in.txt', "r").readline()[0:])
-file = open('in.txt', "r")
+file = open(sys.argv[1], "r")
 readFile = file.readlines()[1:]
 for line in readFile:
     line = line.replace(" ","")
@@ -50,14 +48,11 @@ for line in readFile:
     matrix.append(line)
 
 print(maximalRectangle(matrix,numRowCol))
+
 answer = maximalRectangle(matrix, numRowCol)
 # Write file
-with open('out.txt', 'w') as f:
+with open(sys.argv[2], 'w') as f:
     f.write("%s " % answer)
     f.write('\n')
-end = timeit.timeit()
-# Check running time
-print('Start: ',start)
-print('End: ',end)
-print(float(end - start))
+
 
